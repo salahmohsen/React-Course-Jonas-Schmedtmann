@@ -1,0 +1,220 @@
+#root {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+p {
+  margin: 0;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+.card-container {
+  box-sizing: border-box;
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 30px;
+  gap: 10px;
+
+  position: absolute;
+  top: 50%;
+  width: auto;
+  height: auto;
+
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 10px 10px 0px #000000;
+  border-radius: 10px;
+}
+
+.card-container:hover {
+  box-shadow: 0px 0px 0px #000000;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.avatar {
+  width: 110px;
+  height: 110px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px 0px 0px 15.0847px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.intro-one {
+  /* Hello I am */
+
+  box-sizing: border-box;
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10.0565px 20.113px;
+
+  width: 157.23px;
+  height: 48.11px;
+
+  border-width: 1.15162px 1.15162px 0px 1.15162px;
+  border-style: solid;
+  border-color: #2f2d2b;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.intro-two {
+  /* Salah Mohsen */
+
+  box-sizing: border-box;
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10.0565px 20.113px;
+
+  width: 255.61px;
+  height: 57.11px;
+
+  border: 1.15162px solid #2f2d2b;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.header-text {
+  box-sizing: border-box;
+  font-family: "Stolzl";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23.0324px;
+  line-height: 28px;
+  /* identical to box height */
+  text-align: center;
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.header-text-two {
+  box-sizing: border-box;
+
+  width: 221px;
+  height: 37px;
+
+  font-family: "Stolzl";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30.9497px;
+  line-height: 37px;
+  text-align: center;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.desc {
+  font-family: "Stolzl";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 18px;
+  width: 40em;
+}
+
+.tags-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+.tag-element {
+  box-sizing: border-box;
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 5px;
+  gap: 5px;
+
+  border: 0.5px solid #000000;
+  border-radius: 5px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.tag-text {
+  font-family: "Stolzl";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #000000;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
