@@ -1,10 +1,8 @@
 # **The Ultimate React Course 2023: React, Redux & More**
--------------
 
-#### Course Content:
--------------
+## Course Content:
 
-##### Section 1: Welcome, Welcome, Welcome!
+### Section 1: Welcome, Welcome, Welcome!
 
 1. Course Roadmap and Projects
 2. Building Our First React App!
@@ -14,14 +12,14 @@
 
 ---
 
-##### Section 2: PART 1: REACT FUNDAMENTALS [4 PROJECTS]
+### Section 2: PART 1: REACT FUNDAMENTALS [4 PROJECTS]
 
 6. Introduction to Part 1
 7. Useful Resources for Part 1
 
 ---
 
-##### Section 3: A First Look at React
+### Section 3: A First Look at React
 
 8. Section Overview
 9. Why Do Front-End Frameworks Exist?
@@ -35,7 +33,7 @@
 
 ---
 
-##### Section 4: [Optional] Review of Essential JavaScript for React
+### Section 4: [Optional] Review of Essential JavaScript for React
 
 17. Section Overview
 18. Destructuring Objects and Arrays
@@ -55,7 +53,7 @@
 
 ---
 
-##### Section 5: Working With Components, Props, and JSX
+### Section 5: Working With Components, Props, and JSX
 
 32. Section Overview
 33. Rendering the Root Component and Strict Mode
@@ -84,7 +82,7 @@
 
 ---
 
-##### Section 6: State, Events, and Forms: Interactive Components
+### Section 6: State, Events, and Forms: Interactive Components
 
 56. Section Overview
 57. Let's Build a Steps Component
@@ -110,7 +108,7 @@
 
 ---
 
-##### Section 7: Thinking In React: State Management
+### Section 7: Thinking In React: State Management
 
 77. Section Overview
 78. What is "Thinking in React"?
@@ -132,7 +130,7 @@
 
 ---
 
-##### Section 8: [Optional] Practice Project: Eat-'N-Split
+### Section 8: [Optional] Practice Project: Eat-'N-Split
 
 94. Section Overview
 95. Project Setup
@@ -146,14 +144,14 @@
 
 ---
 
-##### Section 9: PART 2: INTERMEDIATE REACT [2 PROJECTS]
+### Section 9: PART 2: INTERMEDIATE REACT [2 PROJECTS]
 
 103. Introduction to Part 2
 104. Useful Resources for Part 2
 
 ---
 
-##### Section 10: Thinking in React: Components, Composition, and Reusability
+### Section 10: Thinking in React: Components, Composition, and Reusability
 
 105. Section Overview
 106. Setting Up the "usePopcorn" Project
@@ -175,7 +173,7 @@
 
 ---
 
-##### Section 11: How React Works Behind the Scenes
+### Section 11: How React Works Behind the Scenes
 
 122. Section Overview
 123. Project Setup and Walkthrough
@@ -198,7 +196,7 @@
 
 ---
 
-##### Section 12: Effects and Data Fetching
+### Section 12: Effects and Data Fetching
 
 140. Section Overview
 141. The Component Lifecycle
@@ -222,7 +220,7 @@
 
 ---
 
-##### Section 13: Custom Hooks, Refs, and More State
+### Section 13: Custom Hooks, Refs, and More State
 
 159. Section Overview
 160. React Hooks and Their Rules
@@ -242,7 +240,7 @@
 
 ---
 
-##### Section 14: [Optional] React Before Hooks: Class-Based React
+### Section 14: [Optional] React Before Hooks: Class-Based React
 
 174. Section Overview
 175. Our First Class Component
@@ -257,14 +255,14 @@
 
 ---
 
-##### Section 15: PART 3: ADVANCED REACT + REDUX [4 PROJECTS]
+### Section 15: PART 3: ADVANCED REACT + REDUX [4 PROJECTS]
 
 184. Introduction to Part 3
 185. Useful Resources for Part 3
 
 ---
 
-##### Section 16: The Advanced useReducer Hook
+### Section 16: The Advanced useReducer Hook
 
 186. Section Overview
 187. Yet Another Hook: useReducer
@@ -286,7 +284,7 @@
 
 ---
 
-##### Section 17: React Router: Building Single-Page Applications (SPA)
+### Section 17: React Router: Building Single-Page Applications (SPA)
 
 203. Section Overview
 204. Creating Our First App With Vite: "WorldWise"
@@ -308,7 +306,7 @@
 
 ---
 
-##### Section 18: Advanced State Management: The Context API
+### Section 18: Advanced State Management: The Context API
 
 220. Section Overview
 221. CHALLENGE #1: Understand "The Atomic Blog" App
@@ -335,7 +333,7 @@
 
 ---
 
-##### Section 19: Performance Optimization and Advanced useEffect
+### Section 19: Performance Optimization and Advanced useEffect
 
 242. Section Overview
 243. Performance Optimization and Wasted Renders
@@ -358,7 +356,7 @@
 
 ---
 
-##### Section 20: Redux and Modern Redux Toolkit (With Thunks)
+### Section 20: Redux and Modern Redux Toolkit (With Thunks)
 
 260. Section Overview
 261. Introduction to Redux
@@ -382,14 +380,14 @@
 
 ---
 
-##### Section 21: PART 4: PROFESSIONAL REACT DEVELOPMENT [2 PROJECTS]
+### Section 21: PART 4: PROFESSIONAL REACT DEVELOPMENT [2 PROJECTS]
 
 279. Introduction to Part 4
 280. Useful Resources for Part 4
 
 ---
 
-##### Section 22: React Router With Data Loading (v6.4+)
+### Section 22: React Router With Data Loading (v6.4+)
 
 281. Section Overview
 282. Setting Up a New Project: "Fast React Pizza Co."
@@ -406,7 +404,7 @@
 
 ---
 
-##### Section 23: [Optional] Tailwind CSS Crash Course: Styling the App
+### Section 23: [Optional] Tailwind CSS Crash Course: Styling the App
 
 293. Section Overview
 294. What is Tailwind CSS?
@@ -430,7 +428,7 @@
 
 ---
 
-##### Section 24: Adding Redux and Advanced React Router
+### Section 24: Adding Redux and Advanced React Router
 
 312. Section Overview
 313. Modeling the "User" State With Redux Toolkit
@@ -449,7 +447,7 @@
 
 ---
 
-##### Section 25: Setting Up Our Biggest Project + Styled Components
+### Section 25: Setting Up Our Biggest Project + Styled Components
 
 326. Section Overview
 327. Application Planning
@@ -464,7 +462,7 @@
 
 ---
 
-##### Section 26: Supabase Crash Course: Building a Back-End!
+### Section 26: Supabase Crash Course: Building a Back-End!
 
 336. Section Overview
 337. What is Supabase?
@@ -478,7 +476,7 @@
 
 ---
 
-##### Section 27: React Query: Managing Remote State
+### Section 27: React Query: Managing Remote State
 
 345. Section Overview
 346. What is React Query?
@@ -498,7 +496,7 @@
 
 ---
 
-##### Section 28: Advanced React Patterns
+### Section 28: Advanced React Patterns
 
 360. Section Overview
 361. An Overview of Reusability in React
@@ -516,7 +514,7 @@
 
 ---
 
-##### Section 29: [Optional] Implementing More Features: Authentication, Dark Mode, Dashboard, etc
+### Section 29: [Optional] Implementing More Features: Authentication, Dark Mode, Dashboard, etc
 
 373. Section Overview
 374. Client-Side Filtering: Filtering Cabins
@@ -554,7 +552,7 @@
 
 ---
 
-##### Section 30: Deployment With Netlify and Vercel
+### Section 30: Deployment With Netlify and Vercel
 
 406. Section Overview
 407. Deploying to Netlify
@@ -563,6 +561,6 @@
 
 ---
 
-##### Section 31: The End!
+### Section 31: The End!
 
 410. Where to Go from Here
