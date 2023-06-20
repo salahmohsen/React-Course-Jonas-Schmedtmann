@@ -1,10 +1,8 @@
-#### **The Ultimate React Course 2023: React, Redux & More**
-
----
+# **The Ultimate React Course 2023: React, Redux & More**
+-------------
 
 #### Course Content:
-
----
+-------------
 
 ##### Section 1: Welcome, Welcome, Welcome!
 
