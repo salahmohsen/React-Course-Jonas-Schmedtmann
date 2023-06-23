@@ -1,0 +1,41 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.StepsContainer {
+  display: flex;
+  place-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.CountContainer {
+  display: flex;
+  place-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.dateContainer {
+  display: flex;
+  place-items: center;
+  gap: 10px;
+  justify-content: center;
+  font-size: large;
+}
+
+.resetContainer {
+  display: flex;
+  place-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.reset {
+  color: white;
+  background-color: black;
+  width: 100%;
+}
