@@ -1,3 +1,6 @@
 /00-setup
 **/final/
 /flashcards-project
+
+# Local Netlify folder
+.netlify
