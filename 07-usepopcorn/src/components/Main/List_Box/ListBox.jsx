@@ -1,8 +1,8 @@
 import { useState } from "react";
 import MovieList from "./MovieList";
-export default function LeftBox({ tempMovieData }) {
+
+export default function ListBox({ tempMovieData, movies }) {
   const [isOpen1, setIsOpen1] = useState(true);
-  const [movies, setMovies] = useState(tempMovieData);
 
   return (
     <div className="box">

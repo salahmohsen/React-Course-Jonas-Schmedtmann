@@ -1,13 +1,13 @@
 import Search from "./Search";
-import NumberResults from "./NumberResults";
+import NumResults from "./NumResults";
 import Logo from "./Logo";
 
-export default function NavBar() {
+export default function NavBar({ movies }) {
   return (
     <nav className="nav-bar">
       <Logo />
       <Search />
-      <NumberResults />
+      <NumResults movies={movies} />
     </nav>
   );
 }
