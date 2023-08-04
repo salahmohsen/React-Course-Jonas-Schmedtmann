@@ -54,20 +54,21 @@ export default function App() {
   const [movieId, setMovieId] = useState(null);
   const [movieInfo, setmovieInfo] = useState([]);
 
-  // `http://www.omdbapi.com/?i=${movieId}&apikey=${KEY}`
-
   useEffect(() => {
-    (async function fetchMovies() {
+    const controller = new AbortController();
+    async function fetchMovies() {
       try {
-        setErrorMessage("");
         if (query.length < 3) {
           setMovies([]);
           setErrorMessage("");
           return;
         }
         setIsLoading((prevLoader) => ({ ...prevLoader, search: true }));
+        setErrorMessage("");
+
         const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
+          { signal: controller.signal }
         );
 
         if (!res.ok)
@@ -75,14 +76,16 @@ export default function App() {
 
         const data = await res.json();
         if (data.Response === "False") throw new Error("Movie not found!");
-
         setMovies(data.Search);
+        setErrorMessage("");
       } catch (err) {
-        setErrorMessage(err.message);
+        if (err.name !== "AbortError") setErrorMessage(err.message);
       } finally {
         setIsLoading((prevLoader) => ({ ...prevLoader, search: false }));
       }
-    })();
+    }
+    fetchMovies();
+    return () => controller.abort();
   }, [query]);
 
   useEffect(() => {

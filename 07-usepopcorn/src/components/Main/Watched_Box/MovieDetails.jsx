@@ -1,5 +1,5 @@
 import StarRating from "./StarRating";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function MovieDetials({
   movie,
@@ -12,7 +12,13 @@ export default function MovieDetials({
   const watchedUserRating = watched.find(
     (item) => item.imdbID === movie.imdbID
   )?.userRating;
-  console.log(isWatched);
+
+  useEffect(() => {
+    if (!movie.Title) return;
+    document.title = `${movie.Title}`;
+    return () => (document.title = "usePopcorn");
+  }, [movie.Title]);
+
   function handleAddtoList(movie) {
     const newMovie = {
       imdbID: movie.imdbID,
