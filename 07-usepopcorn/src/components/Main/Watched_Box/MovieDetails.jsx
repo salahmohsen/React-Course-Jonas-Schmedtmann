@@ -19,6 +19,16 @@ export default function MovieDetials({
     return () => (document.title = "usePopcorn");
   }, [movie.Title]);
 
+  useEffect(() => {
+    function callback(e) {
+      if (e.code === "Escape") onCloseMovie();
+    }
+    document.addEventListener("keydown", callback);
+    return () => {
+      callback;
+    };
+  }, [onCloseMovie]);
+
   function handleAddtoList(movie) {
     const newMovie = {
       imdbID: movie.imdbID,
