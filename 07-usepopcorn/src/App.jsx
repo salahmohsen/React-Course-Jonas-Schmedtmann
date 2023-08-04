@@ -9,6 +9,7 @@ import MovieList from "./components/Main/List_Box/MovieList";
 import Box from "./components/Main/Box";
 import WatchedSummary from "./components/Main/Watched_Box/WatchedSummary";
 import WatchedMovieList from "./components/Main/Watched_Box/WatchedMovieList";
+import MovieDetials from "./components/Main/Watched_Box/MovieDetails";
 import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMessage";
 
@@ -68,8 +69,15 @@ export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
   const [query, setQuery] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState({
+    search: false,
+    movieDetials: false,
+  });
   const [errorMessage, setErrorMessage] = useState("");
+  const [movieId, setMovieId] = useState(null);
+  const [movieInfo, setmovieInfo] = useState([]);
+
+  // `http://www.omdbapi.com/?i=${movieId}&apikey=${KEY}`
 
   useEffect(() => {
     (async function fetchMovies() {
@@ -80,10 +88,11 @@ export default function App() {
           setErrorMessage("");
           return;
         }
-        setIsLoading(() => true);
+        setIsLoading((prevLoader) => ({ ...prevLoader, search: true }));
         const res = await fetch(
-          `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`
+          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
         );
+
         if (!res.ok)
           throw new Error("Something went wrong with fetching movies!");
 
@@ -94,10 +103,41 @@ export default function App() {
       } catch (err) {
         setErrorMessage(err.message);
       } finally {
-        setIsLoading(false);
+        setIsLoading((prevLoader) => ({ ...prevLoader, search: false }));
       }
     })();
   }, [query]);
+
+  useEffect(() => {
+    (async function fetchMovies() {
+      try {
+        if (!movieId) return;
+        setIsLoading((prevLoader) => ({ ...prevLoader, movieDetials: true }));
+        const res = await fetch(
+          `http://www.omdbapi.com/?i=${movieId}&apikey=${KEY}`
+        );
+
+        if (!res.ok)
+          throw new Error("Something went wrong with fetching the movie!");
+
+        const data = await res.json();
+        if (data.Response === "False") throw new Error("Movie not found!");
+        setmovieInfo(data);
+      } catch (err) {
+        setErrorMessage(err.message);
+      } finally {
+        setIsLoading((prevLoader) => ({ ...prevLoader, movieDetials: false }));
+      }
+    })();
+  }, [movieId]);
+
+  function handleSelectMovie(id) {
+    setMovieId((currID) => (currID === id ? null : id));
+  }
+
+  function handleCloseMovieDetails() {
+    setMovieId(null);
+  }
 
   return (
     <>
@@ -108,13 +148,28 @@ export default function App() {
       </NavBar>
       <Main>
         <Box>
-          {isLoading && <Loader />}
-          {!isLoading && !errorMessage && <MovieList movies={movies} />}
+          {isLoading.search && <Loader />}
+          {!isLoading.search && !errorMessage && (
+            <MovieList movies={movies} onSelectMovie={handleSelectMovie} />
+          )}
           {errorMessage && <ErrorMessage message={errorMessage} />}
         </Box>
         <Box>
-          <WatchedSummary watched={watched} average={average} />
-          <WatchedMovieList watched={watched} />
+          {isLoading.movieDetials && <Loader />}
+          {movieId && errorMessage && <ErrorMessage message={errorMessage} />}
+          {movieId && !isLoading.movieDetials && !errorMessage && (
+            <MovieDetials
+              movie={movieInfo}
+              onCloseMovie={handleCloseMovieDetails}
+            />
+          )}
+
+          {!movieId && (
+            <>
+              <WatchedSummary watched={watched} average={average} />
+              <WatchedMovieList watched={watched} />
+            </>
+          )}
         </Box>
       </Main>
     </>
