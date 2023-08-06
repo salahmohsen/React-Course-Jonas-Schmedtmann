@@ -1,7 +1,8 @@
+import { useKey } from "../../../hooks/useKey";
 import StarRating from "./StarRating";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-export default function MovieDetials({
+export default function MovieDetails({
   movie,
   onCloseMovie,
   onAddWatched,
@@ -12,6 +13,11 @@ export default function MovieDetials({
   const watchedUserRating = watched.find(
     (item) => item.imdbID === movie.imdbID
   )?.userRating;
+  const countRef = useRef(0);
+
+  useEffect(() => {
+    if (userRating) countRef.current++;
+  }, [userRating]);
 
   useEffect(() => {
     if (!movie.Title) return;
@@ -19,15 +25,7 @@ export default function MovieDetials({
     return () => (document.title = "usePopcorn");
   }, [movie.Title]);
 
-  useEffect(() => {
-    function callback(e) {
-      if (e.code === "Escape") onCloseMovie();
-    }
-    document.addEventListener("keydown", callback);
-    return () => {
-      callback;
-    };
-  }, [onCloseMovie]);
+  useKey("Escape", onCloseMovie);
 
   function handleAddtoList(movie) {
     const newMovie = {
@@ -38,6 +36,7 @@ export default function MovieDetials({
       runtime: Number(movie.Runtime.split(" ").at(0)),
       imdbRating: Number(movie.imdbRating),
       userRating: userRating,
+      countRatingDecisions: countRef,
     };
     onAddWatched((watched) => [...watched, newMovie]);
     onCloseMovie();

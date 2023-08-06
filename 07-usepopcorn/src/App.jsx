@@ -9,92 +9,36 @@ import MovieList from "./components/Main/List_Box/MovieList";
 import Box from "./components/Main/Box";
 import WatchedSummary from "./components/Main/Watched_Box/WatchedSummary";
 import WatchedMovieList from "./components/Main/Watched_Box/WatchedMovieList";
-import MovieDetials from "./components/Main/Watched_Box/MovieDetails";
+import MovieDetails from "./components/Main/Watched_Box/MovieDetails";
 import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMessage";
+import { useMovies } from "./hooks/useMovies";
+import { useMovie } from "./hooks/useMovie.js";
+import { useLocalStorageState } from "./hooks/useLocalStorageState";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-const KEY = "670dd291";
-
 export default function App() {
-  const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
+  // States
+  const [watched, setWatched] = useLocalStorageState("watched", []);
   const [query, setQuery] = useState("");
-  const [isLoading, setIsLoading] = useState({
-    search: false,
-    movieDetials: false,
-  });
-  const [errorMessage, setErrorMessage] = useState("");
   const [movieId, setMovieId] = useState(null);
-  const [movieInfo, setmovieInfo] = useState([]);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    async function fetchMovies() {
-      try {
-        if (query.length < 3) {
-          setMovies([]);
-          setErrorMessage("");
-          return;
-        }
-        setIsLoading((prevLoader) => ({ ...prevLoader, search: true }));
-        setErrorMessage("");
+  // Custom Hooks
+  const { movies, isLoading, errorMessage } = useMovies(
+    query,
+    handleCloseMovieDetails
+  );
+  const { isMovieLoading, movieInfo, errorMovieMessage } = useMovie(movieId);
 
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
-          { signal: controller.signal }
-        );
-
-        if (!res.ok)
-          throw new Error("Something went wrong with fetching movies!");
-
-        const data = await res.json();
-        if (data.Response === "False") throw new Error("Movie not found!");
-        setMovies(data.Search);
-        setErrorMessage("");
-      } catch (err) {
-        if (err.name !== "AbortError") setErrorMessage(err.message);
-      } finally {
-        setIsLoading((prevLoader) => ({ ...prevLoader, search: false }));
-      }
-    }
-    fetchMovies();
-    return () => controller.abort();
-  }, [query]);
-
-  useEffect(() => {
-    (async function fetchMovies() {
-      try {
-        if (!movieId) return;
-        setIsLoading((prevLoader) => ({ ...prevLoader, movieDetials: true }));
-        const res = await fetch(
-          `http://www.omdbapi.com/?i=${movieId}&apikey=${KEY}`
-        );
-
-        if (!res.ok)
-          throw new Error("Something went wrong with fetching the movie!");
-
-        const data = await res.json();
-        if (data.Response === "False") throw new Error("Movie not found!");
-        setmovieInfo(data);
-      } catch (err) {
-        setErrorMessage(err.message);
-      } finally {
-        setIsLoading((prevLoader) => ({ ...prevLoader, movieDetials: false }));
-      }
-    })();
-  }, [movieId]);
-
+  // Handles
   function handleSelectMovie(id) {
     setMovieId((currID) => (currID === id ? null : id));
   }
-
   function handleCloseMovieDetails() {
     setMovieId(null);
   }
-
   function handleDeletedWatched(id) {
     setWatched(watched.filter((movie) => movie.imdbID !== id));
   }
@@ -115,10 +59,12 @@ export default function App() {
           {errorMessage && <ErrorMessage message={errorMessage} />}
         </Box>
         <Box>
-          {isLoading.movieDetials && <Loader />}
-          {movieId && errorMessage && <ErrorMessage message={errorMessage} />}
-          {movieId && !isLoading.movieDetials && !errorMessage && (
-            <MovieDetials
+          {isMovieLoading && <Loader />}
+          {movieId && errorMessage && (
+            <ErrorMessage message={errorMovieMessage} />
+          )}
+          {movieId && !isMovieLoading && !errorMovieMessage && (
+            <MovieDetails
               movie={movieInfo}
               onCloseMovie={handleCloseMovieDetails}
               onAddWatched={setWatched}
