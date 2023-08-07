@@ -1,5 +1,10 @@
 import "./App.css";
+import DateCounter from "./components/DateCounter";
 
 export default function App() {
-  return <h1>Hi</h1>;
+  return (
+    <div>
+      <DateCounter />
+    </div>
+  );
 }
