@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { faker } from "@faker-js/faker";
+import { PostProvider, usePosts } from "./PostContext";
 
 function createRandomPost() {
   return {
@@ -9,29 +10,7 @@ function createRandomPost() {
 }
 
 function App() {
-  const [posts, setPosts] = useState(() =>
-    Array.from({ length: 30 }, () => createRandomPost())
-  );
-  const [searchQuery, setSearchQuery] = useState("");
   const [isFakeDark, setIsFakeDark] = useState(false);
-
-  // Derived state. These are the posts that will actually be displayed
-  const searchedPosts =
-    searchQuery.length > 0
-      ? posts.filter((post) =>
-          `${post.title} ${post.body}`
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase())
-        )
-      : posts;
-
-  function handleAddPost(post) {
-    setPosts((posts) => [post, ...posts]);
-  }
-
-  function handleClearPosts() {
-    setPosts([]);
-  }
 
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
   useEffect(
@@ -49,39 +28,35 @@ function App() {
       >
         {isFakeDark ? "☀️" : "🌙"}
       </button>
-
-      <Header
-        posts={searchedPosts}
-        onClearPosts={handleClearPosts}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
-      <Main posts={searchedPosts} onAddPost={handleAddPost} />
-      <Archive onAddPost={handleAddPost} />
-      <Footer />
+      <PostProvider>
+        <Header />
+        <Main />
+        <Archive />
+        <Footer />
+      </PostProvider>
     </section>
   );
 }
 
-function Header({ posts, onClearPosts, searchQuery, setSearchQuery }) {
+function Header() {
+  const { onClearPosts } = usePosts();
+
   return (
     <header>
       <h1>
         <span>⚛️</span>The Atomic Blog
       </h1>
       <div>
-        <Results posts={posts} />
-        <SearchPosts
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-        />
+        <Results />
+        <SearchPosts />
         <button onClick={onClearPosts}>Clear posts</button>
       </div>
     </header>
   );
 }
 
-function SearchPosts({ searchQuery, setSearchQuery }) {
+function SearchPosts() {
+  const { searchQuery, setSearchQuery } = usePosts();
   return (
     <input
       value={searchQuery}
@@ -91,28 +66,30 @@ function SearchPosts({ searchQuery, setSearchQuery }) {
   );
 }
 
-function Results({ posts }) {
+function Results() {
+  const { posts } = usePosts();
   return <p>🚀 {posts.length} atomic posts found</p>;
 }
 
-function Main({ posts, onAddPost }) {
+function Main() {
   return (
     <main>
-      <FormAddPost onAddPost={onAddPost} />
-      <Posts posts={posts} />
+      <FormAddPost />
+      <Posts />
     </main>
   );
 }
 
-function Posts({ posts }) {
+function Posts() {
   return (
     <section>
-      <List posts={posts} />
+      <List />
     </section>
   );
 }
 
-function FormAddPost({ onAddPost }) {
+function FormAddPost() {
+  const { onAddPost } = usePosts();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
@@ -141,7 +118,8 @@ function FormAddPost({ onAddPost }) {
   );
 }
 
-function List({ posts }) {
+function List() {
+  const { posts } = usePosts();
   return (
     <ul>
       {posts.map((post, i) => (
@@ -154,7 +132,8 @@ function List({ posts }) {
   );
 }
 
-function Archive({ onAddPost }) {
+function Archive() {
+  const { onAddPost } = usePosts();
   // Here we don't need the setter function. We're only using state to store these posts because the callback function passed into useState (which generates the posts) is only called once, on the initial render. So we use this trick as an optimization technique, because if we just used a regular variable, these posts would be re-created on every render. We could also move the posts outside the components, but I wanted to show you this trick 😉
   const [posts] = useState(() =>
     // 💥 WARNING: This might make your computer slow! Try a smaller `length` first
