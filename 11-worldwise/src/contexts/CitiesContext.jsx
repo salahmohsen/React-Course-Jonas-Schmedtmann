@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext, useContext } from "react";
+import { useConvertCountryCodeToPNG } from "../hooks/useFlagsConvertor";
 
 const BASE_URL = "http://127.0.0.1:8000";
 
@@ -32,7 +33,9 @@ export function CitiesProvider({ children }) {
       setLoading(true);
       const res = await fetch(`${BASE_URL}/cities/${id}`);
       const data = await res.json();
-      setCurrentCity({ ...data, emoji: flagemojiToPNG(data.emoji) });
+      setCurrentCity({
+        ...data,
+      });
     } catch (error) {
       alert("Something wrong happened with fitching cities...");
     } finally {
@@ -40,18 +43,26 @@ export function CitiesProvider({ children }) {
     }
   }
 
-  function flagemojiToPNG(flag) {
-    const countryCode = Array.from(flag, (codeUnit) => codeUnit.codePointAt())
-      .map((char) => String.fromCharCode(char - 127397).toLowerCase())
-      .join("");
-    return (
-      <img src={`https://flagcdn.com/24x18/${countryCode}.png`} alt="flag" />
-    );
+  async function postCity(newCity) {
+    try {
+      setLoading(true);
+      const res = await fetch(`${BASE_URL}/cities`, {
+        method: "Post",
+        body: JSON.stringify(newCity),
+        headers: { "content-type": "application/json" },
+      });
+      const data = await res.json();
+      if (data) setCities([...cities, data]);
+    } catch (error) {
+      alert("Something wrong happened with fitching cities...");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <CitiesContext.Provider
-      value={{ cities, loading, currentCity, getCity, flagemojiToPNG }}
+      value={{ cities, loading, currentCity, getCity, postCity }}
     >
       {children}
     </CitiesContext.Provider>

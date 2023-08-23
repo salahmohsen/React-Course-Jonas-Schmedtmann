@@ -4,6 +4,7 @@ import { useCities } from "../contexts/CitiesContext";
 import { useEffect } from "react";
 import Spinner from "./Spinner";
 import BackButton from "./BackButton";
+import { useConvertCountryCodeToPNG } from "../hooks/useFlagsConvertor";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -21,15 +22,20 @@ function City() {
     getCity(id);
   }, [id]);
 
+  const { cityName, emoji, date, notes } = currentCity;
+  const emojiPng = useConvertCountryCodeToPNG(emoji);
+
   if (loading) return <Spinner />;
 
-  const { cityName, emoji, date, notes } = currentCity;
   return (
     <div className={styles.city}>
       <div className={styles.row}>
         <h6>City name</h6>
         <h3>
-          <span>{emoji}</span> {cityName}
+          <span>
+            <img src={emojiPng} alt="flag" />
+          </span>
+          {cityName}
         </h3>
       </div>
 

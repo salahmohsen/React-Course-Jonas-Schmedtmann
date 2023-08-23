@@ -35,6 +35,126 @@
         "lng": 13.376933665713324
       },
       "id": 98443197
+    },
+    {
+      "cityName": "Braganca",
+      "country": "Portugal",
+      "emoji": "🇵🇹",
+      "date": "2023-08-23T00:08:43.681Z",
+      "notes": "",
+      "position": {
+        "lat": "41.623655390686395",
+        "lng": "-6.65771484375"
+      },
+      "id": 98443199
+    },
+    {
+      "cityName": "Woudenberg",
+      "country": "Netherlands (the)",
+      "emoji": "🇳🇱",
+      "date": "2023-08-23T00:12:36.418Z",
+      "notes": "",
+      "position": {
+        "lat": "52.07950600379697",
+        "lng": "5.405273437500001"
+      },
+      "id": 98443200
+    },
+    {
+      "cityName": "Woudenberg",
+      "country": "Netherlands (the)",
+      "emoji": "🇳🇱",
+      "date": "2023-08-23T00:13:13.988Z",
+      "notes": "",
+      "position": {
+        "lat": "52.07950600379697",
+        "lng": "5.405273437500001"
+      },
+      "id": 98443201
+    },
+    {
+      "cityName": "Treffurt",
+      "country": "Germany",
+      "emoji": "🇩🇪",
+      "date": "2023-08-23T00:13:27.880Z",
+      "notes": "",
+      "position": {
+        "lat": "51.055207338584964",
+        "lng": "10.173339843750002"
+      },
+      "id": 98443202
+    },
+    {
+      "cityName": "Krosniewice",
+      "country": "Poland",
+      "emoji": "🇵🇱",
+      "date": "2023-08-23T00:13:47.507Z",
+      "notes": "",
+      "position": {
+        "lat": "52.22779941887071",
+        "lng": "19.16015625"
+      },
+      "id": 98443203
+    },
+    {
+      "cityName": "Greater London",
+      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "emoji": "🇬🇧",
+      "date": "2023-08-23T00:14:26.458Z",
+      "notes": "",
+      "position": {
+        "lat": "51.467696956223385",
+        "lng": "-0.17578125"
+      },
+      "id": 98443204
+    },
+    {
+      "cityName": "Newport",
+      "country": "Ireland",
+      "emoji": "🇮🇪",
+      "date": "2023-08-23T00:14:36.533Z",
+      "notes": "",
+      "position": {
+        "lat": "52.855864177853995",
+        "lng": "-8.305664062500002"
+      },
+      "id": 98443205
+    },
+    {
+      "cityName": "Bantry",
+      "country": "Ireland",
+      "emoji": "🇮🇪",
+      "date": "2023-08-23T00:19:02.184Z",
+      "notes": "",
+      "position": {
+        "lat": "51.7406361640977",
+        "lng": "-9.514160156250002"
+      },
+      "id": 98443206
+    },
+    {
+      "cityName": "Bantry",
+      "country": "Ireland",
+      "emoji": "🇮🇪",
+      "date": "2023-08-23T00:21:31.987Z",
+      "notes": "",
+      "position": {
+        "lat": "51.7406361640977",
+        "lng": "-9.514160156250002"
+      },
+      "id": 98443207
+    },
+    {
+      "cityName": "Le Teilleul",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2023-08-23T00:22:21.419Z",
+      "notes": "",
+      "position": {
+        "lat": "48.56024979174329",
+        "lng": "-0.9008789062500001"
+      },
+      "id": 98443208
     }
   ]
 }
