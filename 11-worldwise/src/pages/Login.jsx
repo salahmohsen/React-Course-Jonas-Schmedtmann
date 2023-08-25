@@ -12,7 +12,7 @@ export default function Login() {
   const { login, isAuthenticated } = useAuthContext();
   const navigate = useNavigate();
 
-  function handleLogin(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     if (email && password) login(email, password);
   }
@@ -24,7 +24,7 @@ export default function Login() {
   return (
     <main className={styles.login}>
       <PageNav />
-      <form className={styles.form} onSubmit={handleLogin}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <label htmlFor="email">Email address</label>
           <input
@@ -46,7 +46,7 @@ export default function Login() {
         </div>
 
         <div>
-          <Button type={"primary"}>Login</Button>
+          <Button type="primary">Login</Button>
         </div>
       </form>
     </main>

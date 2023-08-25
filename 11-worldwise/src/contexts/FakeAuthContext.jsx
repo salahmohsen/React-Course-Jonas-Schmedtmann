@@ -2,7 +2,7 @@ import { createContext, useContext, useReducer } from "react";
 
 const AuthContext = createContext();
 
-const initialState = { user: "", isAuthenticated: false };
+const initialState = { user: null, isAuthenticated: false };
 
 function reducer(state, action) {
   switch (action.type) {
@@ -30,8 +30,8 @@ function AuthProvider({ children }) {
     initialState
   );
 
-  function login(user, password) {
-    if (user === FAKE_USER.email && password === FAKE_USER.password)
+  function login(email, password) {
+    if (email === FAKE_USER.email && password === FAKE_USER.password)
       dispatch({ type: "login", payload: FAKE_USER });
   }
 
