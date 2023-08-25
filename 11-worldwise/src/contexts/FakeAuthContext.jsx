@@ -2,7 +2,7 @@ import { createContext, useContext, useReducer } from "react";
 
 const AuthContext = createContext();
 
-const initialState = { user: null, isAuthenticated: false };
+const initialState = { user: "", isAuthenticated: false };
 
 function reducer(state, action) {
   switch (action.type) {
@@ -24,7 +24,7 @@ const FAKE_USER = {
   avatar: "https://i.pravatar.cc/100?u=zz",
 };
 
-function AuthContextProvider({ children }) {
+function AuthProvider({ children }) {
   const [{ user, isAuthenticated }, dispatch] = useReducer(
     reducer,
     initialState
@@ -32,7 +32,7 @@ function AuthContextProvider({ children }) {
 
   function login(user, password) {
     if (user === FAKE_USER.email && password === FAKE_USER.password)
-      dispatch({ type: login, payload: FAKE_USER });
+      dispatch({ type: "login", payload: FAKE_USER });
   }
 
   function logout() {
@@ -52,4 +52,4 @@ function useAuthContext() {
   return context;
 }
 
-export { AuthContextProvider, useAuthContext };
+export { AuthProvider, useAuthContext };
