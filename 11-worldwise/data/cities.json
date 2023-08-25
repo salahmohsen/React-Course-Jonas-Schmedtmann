@@ -1,16 +1,64 @@
 {
   "cities": [
     {
-      "cityName": "Warsaw",
-      "country": "Poland",
-      "emoji": "🇵🇱",
-      "date": "2023-08-23T00:40:41.956Z",
+      "cityName": "Cairo",
+      "country": "Egypt",
+      "emoji": "🇪🇬",
+      "date": "2023-08-23T00:41:38.355Z",
       "notes": "",
       "position": {
-        "lat": "52.2008737173322",
-        "lng": "21.005859375000004"
+        "lat": "30.06909396443887",
+        "lng": "31.333007812500004"
       },
-      "id": 1
+      "id": 2
+    },
+    {
+      "cityName": "Paris",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2023-08-23T02:09:33.964Z",
+      "notes": "",
+      "position": {
+        "lat": "48.83579746243093",
+        "lng": "2.3510742187500004"
+      },
+      "id": 3
+    },
+    {
+      "cityName": "Berlin",
+      "country": "Germany",
+      "emoji": "🇩🇪",
+      "date": "2023-08-23T02:09:41.505Z",
+      "notes": "",
+      "position": {
+        "lat": "52.482780222078226",
+        "lng": "13.447265625000002"
+      },
+      "id": 4
+    },
+    {
+      "cityName": "Washington",
+      "country": "United States of America (the)",
+      "emoji": "🇺🇸",
+      "date": "2023-08-23T02:09:55.849Z",
+      "notes": "",
+      "position": {
+        "lat": "38.92522904714054",
+        "lng": "-77.03613281250001"
+      },
+      "id": 5
+    },
+    {
+      "cityName": "Aswan",
+      "country": "Egypt",
+      "emoji": "🇪🇬",
+      "date": "2023-08-23T02:12:20.943Z",
+      "notes": "",
+      "position": {
+        "lat": "23.0999442125314",
+        "lng": "32.40966796875001"
+      },
+      "id": 7
     }
   ]
 }
