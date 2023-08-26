@@ -20,7 +20,7 @@ function City() {
 
   useEffect(() => {
     getCity(id);
-  }, [id]);
+  }, [id, getCity]);
 
   const { cityName, emoji, date, notes } = currentCity;
   const emojiPng = useConvertCountryCodeToPNG(emoji);
