@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 function CartOverview() {
   const cart = useSelector(getCart);
   const isCartEmpty = Object.keys(cart).length === 0;
-  const pizzaOrderedNum = Object.keys(cart).length;
+  const pizzaOrderedNum = cart.reduce((acc, curr) => curr.quantity + acc, 0);
   const orderTotalPrice = cart.reduce((acc, curr) => {
     if (curr.totalPrice !== undefined) return curr.totalPrice + acc;
     else return acc;
