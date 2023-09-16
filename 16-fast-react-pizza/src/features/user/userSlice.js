@@ -31,6 +31,7 @@ const initialState = {
   status: "idle",
   position: {},
   address: "",
+  error: "",
 };
 
 const userSlice = createSlice({
@@ -52,7 +53,9 @@ const userSlice = createSlice({
         state.status = "idle";
       })
       .addCase(fetchAddress.rejected, (state, action) => {
-        state.status = action.error.message;
+        state.error =
+          "Something wrong happened with getting your address, make sure to write it before submitting your order";
+        state.status = "error";
       }),
 });
 export const getUser = (state) => state.user.username;
