@@ -3,6 +3,9 @@ import { formatCurrency } from "../../utils/helpers";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
+import Button from "../../ui/Button";
+import { useState } from "react";
+import CreateCabinForm from "./CreateCabinForm";
 
 const TableRow = styled.div`
   display: grid;
@@ -43,7 +46,18 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
+const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  vertical-align: middle;
+  justify-content: center;
+  gap: 0.5rem;
+`;
+
 function CabinRow({ cabin }) {
+  const [showForm, setShowForm] = useState(false);
+
   const {
     id: cabinID,
     name,
@@ -67,16 +81,39 @@ function CabinRow({ cabin }) {
   });
 
   return (
-    <TableRow role="row">
-      <img src={image} alt={description} />
-      <Cabin>{name}</Cabin>
-      <div>Fits up to {maxCapacity}</div>
-      <Price>{formatCurrency(regularPrice)}</Price>
-      <Discount>{formatCurrency(discount)}</Discount>
-      <button onClick={() => mutate(cabinID)} disabled={isDeleting}>
-        Delete
-      </button>
-    </TableRow>
+    <>
+      <TableRow role="row">
+        <img src={image} alt={description} />
+        <Cabin>{name}</Cabin>
+        <div>Fits up to {maxCapacity}</div>
+        <Price>{formatCurrency(regularPrice)}</Price>
+        {discount ? (
+          <Discount>{formatCurrency(discount)}</Discount>
+        ) : (
+          <span>&mdash;</span>
+        )}
+        <ButtonsContainer>
+          <Button
+            variation="secondary"
+            size="small"
+            onClick={() => setShowForm((curr) => !curr)}
+          >
+            Edit
+          </Button>
+          <Button
+            variation="danger"
+            size="small"
+            onClick={() => mutate(cabinID)}
+            disabled={isDeleting}
+          >
+            Delete
+          </Button>
+        </ButtonsContainer>
+      </TableRow>
+      {showForm && (
+        <CreateCabinForm cabinToEdit={cabin} setShowForm={setShowForm} />
+      )}
+    </>
   );
 }
 
