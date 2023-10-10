@@ -6,6 +6,9 @@ import toast from "react-hot-toast";
 import Button from "../../ui/Button";
 import { useState } from "react";
 import CreateCabinForm from "./CreateCabinForm";
+import { HiSquare2Stack, HiPencil, HiTrash } from "react-icons/hi2";
+import useDeleteCabin from "./useDeleteCabin";
+import { useCreateCabin } from "./useCreateCabin";
 
 const TableRow = styled.div`
   display: grid;
@@ -56,8 +59,9 @@ const ButtonsContainer = styled.div`
 `;
 
 function CabinRow({ cabin }) {
+  const { isDeleting, deleteCabinWithId } = useDeleteCabin();
+  const { createCabin, isCreating } = useCreateCabin();
   const [showForm, setShowForm] = useState(false);
-
   const {
     id: cabinID,
     name,
@@ -68,17 +72,16 @@ function CabinRow({ cabin }) {
     image,
   } = cabin;
 
-  const queryClient = useQueryClient();
-  const { isLoading: isDeleting, mutate } = useMutation({
-    mutationFn: deleteCabin,
-    onSuccess: () => {
-      toast.success("Cabin Succefully Deleted");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-    },
-    onError: (err) => toast.error(err.message),
-  });
+  function handleDuplicateCabin() {
+    createCabin({
+      name: `copy of ${name}`,
+      maxCapacity,
+      regularPrice,
+      discount,
+      description,
+      image,
+    });
+  }
 
   return (
     <>
@@ -96,17 +99,25 @@ function CabinRow({ cabin }) {
           <Button
             variation="secondary"
             size="small"
+            onClick={handleDuplicateCabin}
+            disabled={isCreating}
+          >
+            <HiSquare2Stack />
+          </Button>
+          <Button
+            variation="secondary"
+            size="small"
             onClick={() => setShowForm((curr) => !curr)}
           >
-            Edit
+            <HiPencil />
           </Button>
           <Button
             variation="danger"
             size="small"
-            onClick={() => mutate(cabinID)}
+            onClick={() => deleteCabinWithId(cabinID)}
             disabled={isDeleting}
           >
-            Delete
+            <HiTrash />
           </Button>
         </ButtonsContainer>
       </TableRow>
