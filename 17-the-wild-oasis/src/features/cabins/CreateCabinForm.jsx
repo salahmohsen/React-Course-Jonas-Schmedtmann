@@ -11,7 +11,7 @@ import { createEditCabin } from "../../services/apiCabins";
 import { useCreateCabin } from "./useCreateCabin";
 import { useEditCabin } from "./useEditCabin";
 
-function CreateCabinForm({ setShowForm, cabinToEdit = {} }) {
+function CreateCabinForm({ onClose, cabinToEdit = {} }) {
   const { isCreating, createCabin } = useCreateCabin();
   const { isEditing, editCabin } = useEditCabin();
   const isWorking = isCreating || isEditing;
@@ -122,11 +122,7 @@ function CreateCabinForm({ setShowForm, cabinToEdit = {} }) {
       </FormRow>
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button
-          variation="secondary"
-          type="reset"
-          onClick={() => setShowForm(false)}
-        >
+        <Button variation="secondary" type="reset" onClick={onClose}>
           Cancel
         </Button>
         <Button disabled={isWorking}>Edit Cabin</Button>
