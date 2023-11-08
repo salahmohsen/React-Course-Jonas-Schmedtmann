@@ -33,6 +33,7 @@ function CreateCabinForm({ onClose, cabinToEdit = {} }) {
         {
           onSuccess: (data) => {
             reset();
+            onClose();
           },
         }
       );

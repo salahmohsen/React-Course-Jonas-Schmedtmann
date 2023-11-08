@@ -1,14 +1,13 @@
 import styled from "styled-components";
-import { formatCurrency } from "../../utils/helpers";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteCabin } from "../../services/apiCabins";
-import toast from "react-hot-toast";
-import Button from "../../ui/Button";
-import { useState } from "react";
+
 import CreateCabinForm from "./CreateCabinForm";
-import { HiSquare2Stack, HiPencil, HiTrash } from "react-icons/hi2";
-import useDeleteCabin from "./useDeleteCabin";
+import { useDeleteCabin } from "./useDeleteCabin";
+import { formatCurrency } from "../../utils/helpers";
+import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { useCreateCabin } from "./useCreateCabin";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
+import Button from "../../ui/Button";
 
 const TableRow = styled.div`
   display: grid;
@@ -49,81 +48,75 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
-const ButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  vertical-align: middle;
-  justify-content: center;
-  gap: 0.5rem;
-`;
-
 function CabinRow({ cabin }) {
   const { isDeleting, deleteCabinWithId } = useDeleteCabin();
-  const { createCabin, isCreating } = useCreateCabin();
-  const [showForm, setShowForm] = useState(false);
+  const { isCreating, createCabin } = useCreateCabin();
+
   const {
-    id: cabinID,
+    id: cabinId,
     name,
     maxCapacity,
     regularPrice,
     discount,
-    description,
     image,
+    description,
   } = cabin;
 
-  function handleDuplicateCabin() {
+  function handleDuplicate() {
     createCabin({
-      name: `copy of ${name}`,
+      name: `Copy of ${name}`,
       maxCapacity,
       regularPrice,
       discount,
-      description,
       image,
+      description,
     });
   }
 
   return (
     <>
       <TableRow role="row">
-        <img src={image} alt={description} />
+        <Img src={image} />
         <Cabin>{name}</Cabin>
-        <div>Fits up to {maxCapacity}</div>
+        <div>Fits up to {maxCapacity} guests</div>
         <Price>{formatCurrency(regularPrice)}</Price>
         {discount ? (
           <Discount>{formatCurrency(discount)}</Discount>
         ) : (
           <span>&mdash;</span>
         )}
-        <ButtonsContainer>
-          <Button
-            variation="secondary"
-            size="small"
-            onClick={handleDuplicateCabin}
-            disabled={isCreating}
-          >
-            <HiSquare2Stack />
-          </Button>
-          <Button
-            variation="secondary"
-            size="small"
-            onClick={() => setShowForm((curr) => !curr)}
-          >
-            <HiPencil />
-          </Button>
-          <Button
-            variation="danger"
-            size="small"
-            onClick={() => deleteCabinWithId(cabinID)}
-            disabled={isDeleting}
-          >
-            <HiTrash />
-          </Button>
-        </ButtonsContainer>
+        <div>
+          <Modal>
+            <Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
+              <HiSquare2Stack />
+            </Button>
+
+            <Modal.Open opensWindowName="edit">
+              <Button icon={<HiPencil />}>
+                <HiPencil />
+              </Button>
+            </Modal.Open>
+
+            <Modal.Open opensWindowName="delete">
+              <Button icon={<HiTrash />}>
+                <HiTrash />
+              </Button>
+            </Modal.Open>
+
+            <Modal.Window name="edit">
+              <CreateCabinForm cabinToEdit={cabin} />
+            </Modal.Window>
+
+            <Modal.Window name="delete">
+              <ConfirmDelete
+                resourceName="cabins"
+                onConfirm={() => deleteCabinWithId(cabinId)}
+                disabled={isDeleting}
+              />
+            </Modal.Window>
+          </Modal>
+        </div>
       </TableRow>
-      {showForm && (
-        <CreateCabinForm cabinToEdit={cabin} setShowForm={setShowForm} />
-      )}
     </>
   );
 }
